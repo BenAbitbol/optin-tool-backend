@@ -1,10 +1,15 @@
 const express = require('express');
-const cors = require('cors');  // Import du middleware CORS
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Utilisation de CORS pour autoriser les requêtes provenant de tous les domaines (ou restreindre à un domaine spécifique)
-app.use(cors());
+// Configuration CORS pour autoriser uniquement les requêtes provenant de Shopify
+const corsOptions = {
+  origin: 'https://parroquies-andorre.myshopify.com',  // Remplace par ton domaine exact
+  optionsSuccessStatus: 200 // Pour gérer les navigateurs plus anciens
+};
+
+app.use(cors(corsOptions));
 
 // Middleware pour parser le JSON
 app.use(express.json());
