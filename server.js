@@ -1,6 +1,10 @@
 const express = require('express');
+const cors = require('cors');  // Import du middleware CORS
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Utilisation de CORS pour autoriser les requêtes provenant de tous les domaines (ou restreindre à un domaine spécifique)
+app.use(cors());
 
 // Middleware pour parser le JSON
 app.use(express.json());
