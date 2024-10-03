@@ -3,13 +3,19 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuration CORS pour autoriser uniquement les requêtes provenant de Shopify
+// Configuration CORS pour autoriser uniquement Shopify
 const corsOptions = {
-  origin: 'https://parroquies-andorre.myshopify.com',  // Remplace par ton domaine exact
-  optionsSuccessStatus: 200 // Pour gérer les navigateurs plus anciens
+  origin: 'https://parroquies-andorre.myshopify.com', // Remplace par ton domaine Shopify
+  methods: ['GET', 'POST', 'OPTIONS'], // Autorise les méthodes GET, POST et OPTIONS
+  allowedHeaders: ['Content-Type'], // Autorise l'en-tête 'Content-Type'
+  optionsSuccessStatus: 200 // Pour compenser les navigateurs plus anciens
 };
 
+// Middleware pour CORS
 app.use(cors(corsOptions));
+
+// Gérer les requêtes préflight OPTIONS
+app.options('*', cors(corsOptions)); // Active CORS pour toutes les requêtes OPTIONS
 
 // Middleware pour parser le JSON
 app.use(express.json());
